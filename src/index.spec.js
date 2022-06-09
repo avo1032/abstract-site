@@ -11,8 +11,15 @@ describe('Site 요구사항 테스트', () => {
     test('Site에는 Board를 추가하고 추가된 Board를 조회할 수 있다.', () => {
         const mySite = new Site();
         const noticeBoard = new Board('공지사항');
+        // const noticeBoard2 = new Board('공지사항2');
 
         mySite.addBoard(noticeBoard);
+        // console.log(mySite.boards)
+        // console.log(mySite.boards.find(function(board){ return board.boardName === '공지사항'}))
+        // console.log(noticeBoard.boardName)
+        // console.log(typeof(noticeBoard.boardName))
+        // console.log(noticeBoard.boardName === '공지사항')
+        // console.log(noticeBoard2)
 
         expect(mySite.findBoardByName('공지사항')).toEqual(noticeBoard);
     });
@@ -21,8 +28,14 @@ describe('Site 요구사항 테스트', () => {
         const mySite = new Site();
         const noticeBoard1 = new Board('공지사항');
         const noticeBoard2 = new Board('공지사항');
-
+        // const noticeBoard3 = new Board('공지사항');
         mySite.addBoard(noticeBoard1);
+        // mySite.addBoard(noticeBoard3);
+        // console.log(mySite)
+
+        
+        // console.log(mySite.boards.find(function(board) { return board.boardName === '공지사'}))
+        // console.log(noticeBoard1)
 
         expect(() => {
             mySite.addBoard(noticeBoard2);
@@ -74,6 +87,8 @@ describe('Board 요구사항 테스트', () => {
 
         mySite.addBoard(addedBoard);
 
+        // console.log(addedBoard.added)
+        // console.log(notAddedBoard.added)
         expect(() => {
             const article = new Article({
                 subject: '글 제목',
@@ -83,6 +98,7 @@ describe('Board 요구사항 테스트', () => {
             addedBoard.publish(article);
         }).not.toThrow();
 
+        
         expect(() => {
             const article = new Article({
                 subject: '글 제목2',
@@ -102,8 +118,10 @@ describe('Board 요구사항 테스트', () => {
             content: '테스트 코드는 수정하면 안됩니다.',
             author: '강승현',
         });
+        
         noticeBoard.publish(article);
 
+        console.log(article.id)
         // 규칙은 ${board.name}-${랜덤 값} 를 따른다.
         expect(article.id.startsWith('공지사항-')).toBe(true);
     });
@@ -117,7 +135,17 @@ describe('Board 요구사항 테스트', () => {
             content: '테스트 코드는 수정하면 안됩니다.',
             author: '강승현',
         });
+        
+        // console.log(article.createdDate)
         noticeBoard.publish(article);
+        // console.log(article);
+        // console.log(article.createdDate)
+        // const regex = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/;
+        // console.log(typeof('2022-06-07T15:41:58.153Z'))
+        // console.log(typeof(article.createdDate))
+        // console.log(regex.test('2022-06-07T15:41:58.153Z'))
+        // console.log(regex.test(article.createdDate))
+        
 
         // createdDate가 저장되는 형식은 ISO 8601을 따른다.
         expect(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/.test(article.createdDate)).toBe(true);
@@ -139,6 +167,7 @@ describe('Board 요구사항 테스트', () => {
         });
 
         noticeBoard.publish(article);
+        // console.log(noticeBoard)
 
         expect(() => {
             noticeBoard.publish(article2);
@@ -155,6 +184,9 @@ describe('Board 요구사항 테스트', () => {
             author: '강승현',
         });
         noticeBoard.publish(article);
+        // console.log(article)
+        // console.log(noticeBoard)
+        // console.log(mySite)
 
         const article2 = new Article({
             subject: '두번째 공지사항입니다.',
